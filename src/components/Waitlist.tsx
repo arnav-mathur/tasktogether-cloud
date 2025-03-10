@@ -4,23 +4,44 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const Waitlist = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email.trim()) {
+      toast.error("Please enter your email address");
+      return;
+    }
+    
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Add user to Firestore waitlist collection
+      await addDoc(collection(db, "waitlist"), {
+        email,
+        name: name.trim() || null,
+        createdAt: serverTimestamp()
+      });
+      
       toast.success("You've been added to our waitlist!", {
         description: "We'll notify you when Focus Flow launches.",
       });
+      
       setEmail("");
+      setName("");
+    } catch (error) {
+      console.error("Error adding to waitlist:", error);
+      toast.error("Something went wrong. Please try again later.");
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
   
   return (
@@ -51,22 +72,31 @@ const Waitlist = () => {
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col space-y-4">
               <Input
-                type="email"
-                placeholder="Enter your email address"
+                type="text"
+                placeholder="Your name (optional)"
                 className="rounded-lg bg-background/50 border-primary/20 h-12"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
-              <Button 
-                type="submit" 
-                className="sm:flex-shrink-0 rounded-lg h-12 px-8 shadow-lg hover:shadow-xl bg-primary hover:bg-primary/90 transition-all"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Joining..." : "Join Waitlist"}
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="rounded-lg bg-background/50 border-primary/20 h-12"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <Button 
+                  type="submit" 
+                  className="sm:flex-shrink-0 rounded-lg h-12 px-8 shadow-lg hover:shadow-xl bg-primary hover:bg-primary/90 transition-all"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Joining..." : "Join Waitlist"}
+                </Button>
+              </div>
             </div>
             <p className="text-sm text-muted-foreground text-center">
               We respect your privacy and will never share your information.

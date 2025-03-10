@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Calendar, Check, MessageSquare, Bell } from "lucide-react";
+import { Calendar, MessageSquare, Bell, Shield } from "lucide-react";
 
 const steps = [
   {
@@ -19,9 +19,9 @@ const steps = [
     description: "Get perfectly timed notifications via app or WhatsApp that keep you on track without overwhelming you. Your AI partner knows when to nudge you gently."
   },
   {
-    icon: <Check className="w-10 h-10 text-primary" />,
-    title: "Verify Task Completion",
-    description: "Confirm you've completed tasks through photo verification, geotagging, or social verification from friends—making accountability real and meaningful."
+    icon: <Shield className="w-10 h-10 text-primary" />,
+    title: "How We Verify Your Tasks",
+    description: "Choose from multiple verification methods: Photo verification authenticated by AI, location-based geotagging to confirm you're at the right place, or social verification from friends and family."
   }
 ];
 
