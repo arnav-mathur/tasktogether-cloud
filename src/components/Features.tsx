@@ -1,6 +1,5 @@
-
 import { motion } from "framer-motion";
-import { Calendar, Check, User, Users, MessageSquare, Award, MapPin, Camera, Zap } from "lucide-react";
+import { Calendar, Check, User, Users, MessageSquare, Award, Shield, Zap, Ban } from "lucide-react";
 
 const features = [
   {
@@ -34,19 +33,14 @@ const features = [
     description: "Gamify your productivity with challenges, streaks and leaderboards with friends and family."
   },
   {
-    icon: <Camera className="w-6 h-6 text-primary" />,
-    title: "Photo Verification",
-    description: "Verify task completion with a simple photo, authenticated by our AI."
+    icon: <Shield className="w-6 h-6 text-primary" />,
+    title: "Task Verification System",
+    description: "Verify your tasks with photo verification, location-based geotagging, or social verification from friends and family."
   },
   {
-    icon: <MapPin className="w-6 h-6 text-primary" />,
-    title: "Geotagging",
-    description: "Confirm you're at the right location for location-specific tasks."
-  },
-  {
-    icon: <Users className="w-6 h-6 text-primary" />,
-    title: "Social Verification",
-    description: "Have friends confirm your task completion for added accountability."
+    icon: <Ban className="w-6 h-6 text-primary" />,
+    title: "App Blocking",
+    description: "Block distracting apps during focus sessions to maintain productivity and stay on track with your goals."
   }
 ];
 

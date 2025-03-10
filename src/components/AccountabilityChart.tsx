@@ -1,21 +1,90 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-
-const data = [
-  { name: "Improved with Accountability", value: 78 },
-  { name: "Other Methods", value: 22 },
-];
-
-const COLORS = ["#6366f1", "#1e293b"];
+import * as THREE from "three";
 
 const AccountabilityChart = () => {
-  const [animate, setAnimate] = useState(false);
+  const chartRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    const timer = setTimeout(() => setAnimate(true), 500);
-    return () => clearTimeout(timer);
+    if (!chartRef.current) return;
+    
+    // Set up scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, chartRef.current.clientWidth / chartRef.current.clientHeight, 0.1, 1000);
+    camera.position.z = 5;
+    
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(chartRef.current.clientWidth, chartRef.current.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    
+    if (chartRef.current.firstChild) {
+      chartRef.current.removeChild(chartRef.current.firstChild);
+    }
+    chartRef.current.appendChild(renderer.domElement);
+    
+    // Create pie chart pieces
+    const pieGeometry = new THREE.TorusGeometry(1.5, 0.4, 16, 100, Math.PI * 0.44);
+    const improvementMaterial = new THREE.MeshPhongMaterial({ 
+      color: new THREE.Color("#6366f1"),
+      shininess: 100,
+      specular: new THREE.Color("#ffffff")
+    });
+    const improvementPiece = new THREE.Mesh(pieGeometry, improvementMaterial);
+    improvementPiece.rotation.z = Math.PI * 0.78;
+    scene.add(improvementPiece);
+    
+    const otherGeometry = new THREE.TorusGeometry(1.5, 0.4, 16, 100, Math.PI * 0.12);
+    const otherMaterial = new THREE.MeshPhongMaterial({ 
+      color: new THREE.Color("#1e293b"),
+      shininess: 80,
+      specular: new THREE.Color("#c7d2fe")
+    });
+    const otherPiece = new THREE.Mesh(otherGeometry, otherMaterial);
+    otherPiece.rotation.z = Math.PI * 0.12;
+    scene.add(otherPiece);
+    
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0x404040, 1);
+    scene.add(ambientLight);
+    
+    const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight1.position.set(1, 1, 1);
+    scene.add(directionalLight1);
+    
+    const directionalLight2 = new THREE.DirectionalLight(0x6366f1, 0.5);
+    directionalLight2.position.set(-1, -1, -1);
+    scene.add(directionalLight2);
+    
+    // Animation loop
+    let frameId: number;
+    const animate = () => {
+      frameId = requestAnimationFrame(animate);
+      
+      improvementPiece.rotation.y += 0.005;
+      otherPiece.rotation.y += 0.005;
+      
+      renderer.render(scene, camera);
+    };
+    
+    animate();
+    
+    // Handle window resize
+    const handleResize = () => {
+      if (!chartRef.current) return;
+      
+      camera.aspect = chartRef.current.clientWidth / chartRef.current.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(chartRef.current.clientWidth, chartRef.current.clientHeight);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(frameId);
+      scene.clear();
+    };
   }, []);
 
   return (
@@ -50,44 +119,9 @@ const AccountabilityChart = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="flex-1 h-80 flex items-center justify-center glass-card p-6 rounded-2xl subtle-shadow"
+            className="flex-1 h-80 flex flex-col items-center justify-center glass-card p-6 rounded-2xl subtle-shadow relative"
           >
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={data}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={80}
-                  outerRadius={animate ? 120 : 80}
-                  paddingAngle={6}
-                  dataKey="value"
-                  startAngle={90}
-                  endAngle={-270}
-                  animationDuration={1500}
-                  animationBegin={300}
-                >
-                  {data.map((entry, index) => (
-                    <Cell 
-                      key={`cell-${index}`} 
-                      fill={COLORS[index % COLORS.length]} 
-                      stroke="none"
-                      className={index === 0 ? "drop-shadow-lg" : ""}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip 
-                  formatter={(value) => [`${value}%`, "Percentage"]}
-                  contentStyle={{ 
-                    backgroundColor: "rgba(15, 23, 42, 0.8)", 
-                    borderRadius: "0.5rem",
-                    backdropFilter: "blur(12px)",
-                    border: "1px solid rgba(148, 163, 184, 0.2)"
-                  }}
-                  itemStyle={{ color: "#e2e8f0" }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
+            <div ref={chartRef} className="w-full h-full" />
             
             <div className="absolute">
               <div className="text-center">

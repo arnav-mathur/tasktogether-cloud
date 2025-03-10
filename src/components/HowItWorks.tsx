@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Calendar, MessageSquare, Bell, Shield } from "lucide-react";
+import { Calendar, MessageSquare, Bell, Shield, Share2 } from "lucide-react";
 
 const steps = [
   {
@@ -22,6 +22,11 @@ const steps = [
     icon: <Shield className="w-10 h-10 text-primary" />,
     title: "How We Verify Your Tasks",
     description: "Choose from multiple verification methods: Photo verification authenticated by AI, location-based geotagging to confirm you're at the right place, or social verification from friends and family."
+  },
+  {
+    icon: <Share2 className="w-10 h-10 text-primary" />,
+    title: "Share Progress (Optional) With Friends And Family",
+    description: "Celebrate your achievements by sharing your progress with your close ones. Build a support network that cheers for your productivity wins."
   }
 ];
 
