@@ -29,8 +29,10 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold tracking-tighter text-primary">
-            Focus<span className="text-accent">Flow</span>
+          <img src="/logo-infinity.png" alt="Focus Flow Logo" className="h-8 w-auto" />
+          <span className="text-2xl font-bold tracking-tighter">
+            <span className="text-primary">Focus</span>
+            <span className="text-accent">Flow</span>
           </span>
         </div>
         
@@ -49,7 +51,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <a href="#waitlist">
             <Button 
-              className="shadow-md hover:shadow-lg transition-all bg-primary hover:bg-primary/90 text-white rounded-full px-6"
+              className="shadow-md hover:shadow-lg transition-all focus-flow-gradient text-white rounded-full px-6"
             >
               Join Waitlist
             </Button>

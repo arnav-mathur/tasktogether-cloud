@@ -35,6 +35,19 @@ const Index = () => {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  // Preload logo images
+  useEffect(() => {
+    const preloadImages = () => {
+      const infinityLogo = new Image();
+      infinityLogo.src = "/logo-infinity.png";
+      
+      const fullLogo = new Image();
+      fullLogo.src = "/logo-full.png";
+    };
+    
+    preloadImages();
+  }, []);
+
   return (
     <AnimatePresence>
       <motion.div

@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <section className="relative pt-28 md:pt-36 pb-20 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-background -z-10" />
+      <div className="absolute inset-0 focus-flow-gradient opacity-10 -z-10" />
       
       {/* Decorative elements */}
       <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
@@ -19,11 +19,24 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-block py-1 px-4 bg-primary/10 rounded-full"
+              className="inline-block py-1 px-4 focus-flow-gradient rounded-full"
             >
-              <span className="text-sm font-semibold text-primary">
+              <span className="text-sm font-semibold text-white">
                 Coming Soon — Join the Waitlist
               </span>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="flex items-center justify-center gap-4 mb-6"
+            >
+              <img 
+                src="/logo-full.png" 
+                alt="Focus Flow Logo" 
+                className="h-20 md:h-24 w-auto" 
+              />
             </motion.div>
             
             <motion.h1 
@@ -52,7 +65,7 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4"
           >
             <a href="#waitlist">
-              <Button className="rounded-full px-8 py-6 text-base shadow-lg hover:shadow-xl bg-primary hover:bg-primary/90 transition-all">
+              <Button className="rounded-full px-8 py-6 text-base shadow-lg hover:shadow-xl focus-flow-gradient text-white transition-all">
                 Join the Waitlist
               </Button>
             </a>
