@@ -4,8 +4,9 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // Firebase configuration
+// Note: These are placeholder values. You need to replace them with your actual Firebase project credentials
 const firebaseConfig = {
-  apiKey: "AIzaSyB1n4KZe4SHtdp8p82Y1FskRo3V31sHCjY",
+  apiKey: "YOUR_ACTUAL_API_KEY", // ⚠️ Replace with your actual API key from Firebase console
   authDomain: "focus-flow-app.firebaseapp.com",
   projectId: "focus-flow-app",
   storageBucket: "focus-flow-app.appspot.com",

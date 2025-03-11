@@ -24,12 +24,12 @@ const Navbar = () => {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4 px-6 md:px-12",
-        scrolled ? "bg-background/80 backdrop-blur-lg shadow-sm" : "bg-transparent"
+        scrolled ? "bg-background/90 backdrop-blur-lg shadow-md" : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <img src="/logo-infinity.png" alt="Focus Flow Logo" className="h-8 w-auto" />
+          <img src="/logo-infinity.png" alt="Focus Flow Logo" className="h-9 w-auto infinity-glow filter drop-shadow-lg" />
           <span className="text-2xl font-bold tracking-tighter">
             <span className="text-primary">Focus</span>
             <span className="text-accent">Flow</span>
@@ -51,7 +51,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <a href="#waitlist">
             <Button 
-              className="shadow-md hover:shadow-lg transition-all focus-flow-gradient text-white rounded-full px-6"
+              className="shadow-lg hover:shadow-xl transition-all focus-flow-gradient text-white rounded-full px-6"
             >
               Join Waitlist
             </Button>

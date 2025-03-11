@@ -6,11 +6,11 @@ const Hero = () => {
   return (
     <section className="relative pt-28 md:pt-36 pb-20 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 focus-flow-gradient opacity-10 -z-10" />
+      <div className="absolute inset-0 focus-flow-gradient opacity-15 -z-10" />
       
-      {/* Decorative elements */}
-      <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10" />
+      {/* Decorative elements - more vibrant */}
+      <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-primary/15 rounded-full blur-3xl -z-10 animate-pulse-subtle" />
+      <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-accent/15 rounded-full blur-3xl -z-10 animate-pulse-subtle" />
       
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center text-center space-y-10">
@@ -35,7 +35,7 @@ const Hero = () => {
               <img 
                 src="/logo-full.png" 
                 alt="Focus Flow Logo" 
-                className="h-20 md:h-24 w-auto" 
+                className="h-20 md:h-24 w-auto infinity-glow" 
               />
             </motion.div>
             
@@ -45,7 +45,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter"
             >
-              Your AI <span className="title-gradient">Accountability Partner</span> for Maximum Productivity
+              Your AI <span className="title-gradient font-extrabold">Accountability Partner</span> for Maximum Productivity
             </motion.h1>
             
             <motion.p 
@@ -65,12 +65,12 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4"
           >
             <a href="#waitlist">
-              <Button className="rounded-full px-8 py-6 text-base shadow-lg hover:shadow-xl focus-flow-gradient text-white transition-all">
+              <Button className="rounded-full px-8 py-6 text-base shadow-xl hover:shadow-2xl focus-flow-gradient text-white transition-all">
                 Join the Waitlist
               </Button>
             </a>
             <a href="#how-it-works">
-              <Button variant="outline" className="rounded-full px-8 py-6 text-base bg-background/50 backdrop-blur-sm hover:bg-background/80 border border-primary/20 transition-all">
+              <Button variant="outline" className="rounded-full px-8 py-6 text-base bg-background/60 backdrop-blur-sm hover:bg-background/80 border border-primary/30 transition-all">
                 Learn How It Works
               </Button>
             </a>
@@ -82,8 +82,8 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="relative mt-12 w-full max-w-5xl"
           >
-            <div className="aspect-video rounded-2xl overflow-hidden neo-border glass-card p-1 subtle-shadow">
-              <div className="w-full h-full bg-primary/5 rounded-xl flex items-center justify-center">
+            <div className="aspect-video rounded-2xl overflow-hidden neo-border enhanced-card-bg p-1 subtle-shadow">
+              <div className="w-full h-full bg-primary/10 rounded-xl flex items-center justify-center">
                 <div className="text-center space-y-4">
                   <div className="animate-bounce-subtle">
                     <svg
@@ -111,9 +111,9 @@ const Hero = () => {
               </div>
             </div>
             
-            {/* Decorative elements */}
-            <div className="absolute -bottom-6 -right-6 w-36 h-36 bg-accent/10 rounded-full blur-2xl -z-10" />
-            <div className="absolute -top-6 -left-6 w-36 h-36 bg-primary/10 rounded-full blur-2xl -z-10" />
+            {/* Decorative elements - more vibrant */}
+            <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-accent/20 rounded-full blur-2xl -z-10 animate-pulse-subtle" />
+            <div className="absolute -top-6 -left-6 w-40 h-40 bg-primary/20 rounded-full blur-2xl -z-10 animate-pulse-subtle" />
           </motion.div>
         </div>
       </div>

@@ -14,16 +14,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 84% 4.9%;
 
-    --primary: 240 58% 50%;
+    --primary: 250 70% 55%;
     --primary-foreground: 220 100% 98%;
 
-    --secondary: 260 60% 60%;
+    --secondary: 260 70% 65%;
     --secondary-foreground: 222 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 270 60% 65%;
+    --accent: 270 75% 70%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -31,7 +31,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 240 58% 50%;
+    --ring: 250 70% 55%;
 
     --radius: 0.75rem;
   }
@@ -46,16 +46,16 @@
     --popover: 222 47% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 240 58% 50%;
+    --primary: 250 70% 55%;
     --primary-foreground: 220 100% 98%;
 
-    --secondary: 260 60% 60%;
+    --secondary: 260 70% 65%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 270 60% 65%;
+    --accent: 270 75% 70%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -63,7 +63,7 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 240 58% 50%;
+    --ring: 250 70% 55%;
   }
 }
 
@@ -87,7 +87,7 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-lg;
+    @apply bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl;
   }
   
   .section-padding {
@@ -99,19 +99,32 @@
   }
   
   .subtle-shadow {
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.2);
   }
   
   .neo-border {
-    @apply border border-white/10 rounded-2xl;
+    @apply border border-white/20 rounded-2xl;
   }
   
   .focus-ring {
-    @apply outline-none ring-2 ring-primary/50 ring-offset-2 ring-offset-background transition-all;
+    @apply outline-none ring-2 ring-primary/60 ring-offset-2 ring-offset-background transition-all;
   }
   
   .focus-flow-gradient {
-    @apply bg-gradient-to-r from-[#0046c7] via-[#5e4de0] to-[#a355e7];
+    @apply bg-gradient-to-r from-[#4742d6] via-[#6c4de0] to-[#b355e7];
+  }
+
+  .vibrant-bg-gradient {
+    background: linear-gradient(135deg, rgba(71, 66, 214, 0.15) 0%, rgba(108, 77, 224, 0.15) 50%, rgba(179, 85, 231, 0.15) 100%);
+  }
+
+  .enhanced-card-bg {
+    background: linear-gradient(225deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(12px);
+  }
+
+  .infinity-glow {
+    filter: drop-shadow(0 0 12px rgba(108, 77, 224, 0.5));
   }
 }
 

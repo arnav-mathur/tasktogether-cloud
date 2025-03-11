@@ -1,2 +1,41 @@
 
-// This file will be created with the full Focus Flow logo featuring the infinity symbol
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="800" height="267" fill="none">
+  <!-- 3D effect gradients -->
+  <defs>
+    <linearGradient id="infinityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4742d6" />
+      <stop offset="50%" stop-color="#6c4de0" />
+      <stop offset="100%" stop-color="#b355e7" />
+    </linearGradient>
+    <linearGradient id="textGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4742d6" />
+      <stop offset="100%" stop-color="#6c4de0" />
+    </linearGradient>
+    <linearGradient id="textGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6c4de0" />
+      <stop offset="100%" stop-color="#b355e7" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#4742d6" flood-opacity="0.4" />
+    </filter>
+  </defs>
+  
+  <!-- 3D Infinity Symbol -->
+  <g filter="url(#shadow)" transform="translate(50, 50) scale(0.8)">
+    <path d="M70 40 C 70 25, 55 25, 50 30 C 45 25, 30 25, 30 40 C 30 55, 45 55, 50 50 C 55 55, 70 55, 70 40 Z" 
+      stroke="url(#infinityGradient)" stroke-width="6" filter="url(#glow)" />
+  </g>
+  
+  <!-- Logo Text -->
+  <g transform="translate(120, 42)" filter="url(#shadow)">
+    <text font-family="Inter, sans-serif" font-weight="700" font-size="24" fill="url(#textGradient1)">Focus</text>
+    <text font-family="Inter, sans-serif" font-weight="700" font-size="24" x="75" fill="url(#textGradient2)">Flow</text>
+  </g>
+</svg>
