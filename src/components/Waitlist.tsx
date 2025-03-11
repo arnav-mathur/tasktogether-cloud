@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Dialog,
   DialogContent,
@@ -70,14 +69,17 @@ const Waitlist = () => {
         throw new Error("Email is required");
       }
       
-      // Add user to Firestore waitlist collection with feature preferences and feedback
-      await addDoc(collection(db, "waitlist"), {
-        email: email,
-        name: name || null,
-        selectedFeatures,
-        feedback: feedback.trim() || null,
-        createdAt: serverTimestamp()
-      });
+      // Add user to Supabase waitlist table with feature preferences and feedback
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{
+          email: email,
+          name: name || null,
+          selected_features: selectedFeatures,
+          feedback: feedback.trim() || null
+        }]);
+      
+      if (error) throw error;
       
       toast.success("You've been added to our waitlist!", {
         description: "Thank you for your feedback. We'll notify you when Focus Flow launches.",
