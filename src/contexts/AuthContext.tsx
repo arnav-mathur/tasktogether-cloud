@@ -7,8 +7,11 @@ import {
   signOut as firebaseSignOut,
   onAuthStateChanged,
   GoogleAuthProvider,
+  GithubAuthProvider,
+  TwitterAuthProvider,
   signInWithPopup,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  signInWithEmailLink
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 
@@ -18,6 +21,8 @@ interface AuthContextType {
   signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  signInWithGithub: () => Promise<void>;
+  signInWithTwitter: () => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
 }
@@ -37,24 +42,69 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   const signUp = async (email: string, password: string) => {
-    await createUserWithEmailAndPassword(auth, email, password);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error: any) {
+      console.error("Sign up error:", error.message);
+      throw error;
+    }
   };
 
   const signIn = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error: any) {
+      console.error("Sign in error:", error.message);
+      throw error;
+    }
   };
 
   const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+    } catch (error: any) {
+      console.error("Google sign in error:", error);
+      throw error;
+    }
+  };
+
+  const signInWithGithub = async () => {
+    try {
+      const provider = new GithubAuthProvider();
+      await signInWithPopup(auth, provider);
+    } catch (error: any) {
+      console.error("Github sign in error:", error);
+      throw error;
+    }
+  };
+
+  const signInWithTwitter = async () => {
+    try {
+      const provider = new TwitterAuthProvider();
+      await signInWithPopup(auth, provider);
+    } catch (error: any) {
+      console.error("Twitter sign in error:", error);
+      throw error;
+    }
   };
 
   const signOut = async () => {
-    await firebaseSignOut(auth);
+    try {
+      await firebaseSignOut(auth);
+    } catch (error: any) {
+      console.error("Sign out error:", error.message);
+      throw error;
+    }
   };
 
   const resetPassword = async (email: string) => {
-    await sendPasswordResetEmail(auth, email);
+    try {
+      await sendPasswordResetEmail(auth, email);
+    } catch (error: any) {
+      console.error("Reset password error:", error.message);
+      throw error;
+    }
   };
 
   useEffect(() => {
@@ -72,6 +122,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     signUp,
     signIn,
     signInWithGoogle,
+    signInWithGithub,
+    signInWithTwitter,
     signOut,
     resetPassword
   };
