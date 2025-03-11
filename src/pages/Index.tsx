@@ -54,8 +54,9 @@ const Index = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-screen bg-background"
+        className="min-h-screen bg-gradient-to-b from-[#f8f9fe] to-[#f0f4ff]"
       >
+        <div className="absolute top-0 left-0 right-0 h-[40vh] bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 -z-10" />
         <Navbar />
         <main>
           <Hero />
