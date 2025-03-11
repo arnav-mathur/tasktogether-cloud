@@ -3,13 +3,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { useAuth } from "@/contexts/AuthContext";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import AuthDialog from "@/components/AuthDialog";
 
 const features = [
   "AI Accountability Partner",
@@ -23,27 +21,26 @@ const features = [
 ];
 
 const Waitlist = () => {
-  const { currentUser } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showFeaturesDialog, setShowFeaturesDialog] = useState(false);
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
-  const [showAuthDialog, setShowAuthDialog] = useState(false);
-  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
   const [feedback, setFeedback] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   
   const handleJoinWaitlist = () => {
-    if (!currentUser) {
-      setShowAuthDialog(true);
-    } else {
-      // Show features selection dialog if user is already signed in
-      setShowFeaturesDialog(true);
+    if (!email) {
+      toast.error("Please enter your email address");
+      return;
     }
-  };
-  
-  const handleAuthSuccess = () => {
-    setShowAuthDialog(false);
-    // After successful auth, show features dialog
+    
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    
+    // Show features selection dialog
     setShowFeaturesDialog(true);
   };
   
@@ -62,15 +59,14 @@ const Waitlist = () => {
     setIsSubmitting(true);
     
     try {
-      if (!currentUser?.email) {
-        throw new Error("User email not found");
+      if (!email) {
+        throw new Error("Email is required");
       }
       
       // Add user to Firestore waitlist collection with feature preferences and feedback
       await addDoc(collection(db, "waitlist"), {
-        email: currentUser.email,
-        name: currentUser.displayName || null,
-        uid: currentUser.uid,
+        email: email,
+        name: name || null,
         selectedFeatures,
         feedback: feedback.trim() || null,
         createdAt: serverTimestamp()
@@ -80,10 +76,12 @@ const Waitlist = () => {
         description: "Thank you for your feedback. We'll notify you when Focus Flow launches.",
       });
       
-      // Close all dialogs
+      // Close all dialogs and reset form
       setShowFeedbackDialog(false);
       setSelectedFeatures([]);
       setFeedback("");
+      setEmail("");
+      setName("");
     } catch (error) {
       console.error("Error adding to waitlist:", error);
       toast.error("Something went wrong. Please try again later.");
@@ -119,12 +117,43 @@ const Waitlist = () => {
             </p>
           </div>
           
-          <div className="flex flex-col space-y-6 items-center">
+          <div className="flex flex-col space-y-6">
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-1">
+                  Email Address <span className="text-red-500">*</span>
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium mb-1">
+                  Name (Optional)
+                </label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full"
+                />
+              </div>
+            </div>
+            
             <Button 
               onClick={handleJoinWaitlist}
-              className="w-full max-w-md rounded-lg h-12 px-8 shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+              className="w-full max-w-md mx-auto rounded-lg h-12 px-8 shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
             >
-              {currentUser ? "Continue to Waitlist" : "Sign up for Waitlist"}
+              Continue to Waitlist
             </Button>
             
             <p className="text-sm text-muted-foreground text-center">
@@ -194,15 +223,6 @@ const Waitlist = () => {
           </div>
         </motion.div>
       </div>
-      
-      {/* Auth Dialog for Sign in/Sign up */}
-      <AuthDialog 
-        isOpen={showAuthDialog}
-        onClose={() => setShowAuthDialog(false)}
-        onSuccess={handleAuthSuccess}
-        mode={authMode}
-        setMode={setAuthMode}
-      />
       
       {/* Features Selection Dialog */}
       <Dialog open={showFeaturesDialog} onOpenChange={setShowFeaturesDialog}>
