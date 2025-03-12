@@ -1,6 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import Logo from "./Logo";
 
 const Hero = () => {
   return (
@@ -32,11 +32,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.05 }}
               className="flex items-center justify-center gap-4 mb-6"
             >
-              <img 
-                src="/logo-full.png" 
-                alt="Focus Flow Logo" 
-                className="h-20 md:h-24 w-auto infinity-glow" 
-              />
+              <Logo size={60} className="infinity-glow" />
             </motion.div>
             
             <motion.h1 
