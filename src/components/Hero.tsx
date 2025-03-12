@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Logo from "./Logo";
@@ -79,31 +80,15 @@ const Hero = () => {
             className="relative mt-12 w-full max-w-5xl"
           >
             <div className="aspect-video rounded-2xl overflow-hidden neo-border enhanced-card-bg p-1 subtle-shadow">
-              <div className="w-full h-full bg-primary/10 rounded-xl flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="animate-bounce-subtle">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="48"
-                      height="48"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-primary mx-auto"
-                    >
-                      <path d="M12 12v6" />
-                      <path d="m15 15-3-3-3 3" />
-                      <path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4" />
-                      <path d="M5 19.5C5.5 18 6 15 6 12c0-.7.12-1.37.34-2" />
-                      <path d="M22 12c0 5.5-4.5 10-10 10a10 10 0 0 1-8-4" />
-                      <path d="M19 4.5C18.5 6 18 9 18 12c0 .7-.12 1.37-.34 2" />
-                    </svg>
-                  </div>
-                  <p className="font-medium text-muted-foreground">App Demo Preview Coming Soon</p>
-                </div>
+              <div className="w-full h-full rounded-xl overflow-hidden">
+                <iframe 
+                  src="https://www.youtube.com/embed/sNhVvYD7dds" 
+                  title="Focus Flow App Demo"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
             
