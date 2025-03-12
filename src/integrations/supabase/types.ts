@@ -16,6 +16,7 @@ export type Database = {
           feedback: string | null
           id: string
           name: string | null
+          price_preference: number | null
           selected_features: string[] | null
         }
         Insert: {
@@ -24,6 +25,7 @@ export type Database = {
           feedback?: string | null
           id?: string
           name?: string | null
+          price_preference?: number | null
           selected_features?: string[] | null
         }
         Update: {
@@ -32,6 +34,7 @@ export type Database = {
           feedback?: string | null
           id?: string
           name?: string | null
+          price_preference?: number | null
           selected_features?: string[] | null
         }
         Relationships: []

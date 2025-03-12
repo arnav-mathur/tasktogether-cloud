@@ -14,15 +14,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Slider } from "@/components/ui/slider";
 
 const features = [
   "AI Accountability Partner",
-  "Calendar Integration",
-  "Voice & Text Conversion",
-  "Strategic Reminders",
-  "WhatsApp Integration",
+  "Voice & Text to task",
+  "Strategic Reminders (Whatsapp & Notifications)",
   "Challenges & Streaks",
-  "Task Verification System",
+  "Task Verification System (AI, Location & Social)",
   "App Blocking"
 ];
 
@@ -30,8 +29,10 @@ const Waitlist = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showFeaturesDialog, setShowFeaturesDialog] = useState(false);
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
+  const [showPriceDialog, setShowPriceDialog] = useState(false);
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
   const [feedback, setFeedback] = useState("");
+  const [pricePreference, setPricePreference] = useState(5);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   
@@ -61,7 +62,13 @@ const Waitlist = () => {
     setShowFeedbackDialog(true);
   };
   
-  const handleFeedbackSubmit = async () => {
+  const handleFeedbackSubmit = () => {
+    // Close feedback dialog and open price preference dialog
+    setShowFeedbackDialog(false);
+    setShowPriceDialog(true);
+  };
+  
+  const handlePriceSubmit = async () => {
     setIsSubmitting(true);
     
     try {
@@ -69,14 +76,15 @@ const Waitlist = () => {
         throw new Error("Email is required");
       }
       
-      // Add user to Supabase waitlist table with feature preferences and feedback
+      // Add user to Supabase waitlist table with feature preferences, feedback, and price preference
       const { error } = await supabase
         .from('waitlist')
         .insert([{
           email: email,
           name: name || null,
           selected_features: selectedFeatures,
-          feedback: feedback.trim() || null
+          feedback: feedback.trim() || null,
+          price_preference: pricePreference
         }]);
       
       if (error) throw error;
@@ -86,17 +94,24 @@ const Waitlist = () => {
       });
       
       // Close all dialogs and reset form
-      setShowFeedbackDialog(false);
+      setShowPriceDialog(false);
       setSelectedFeatures([]);
       setFeedback("");
       setEmail("");
       setName("");
+      setPricePreference(5);
     } catch (error) {
       console.error("Error adding to waitlist:", error);
       toast.error("Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const formatPriceLabel = (value: number) => {
+    if (value === 0) return "Free";
+    if (value >= 10) return "$10+";
+    return `$${value}`;
   };
   
   return (
@@ -286,8 +301,43 @@ const Waitlist = () => {
               onChange={(e) => setFeedback(e.target.value)}
             />
           </div>
+          <Button onClick={handleFeedbackSubmit} className="w-full">
+            Continue
+          </Button>
+        </DialogContent>
+      </Dialog>
+
+      {/* Price Preference Dialog */}
+      <Dialog open={showPriceDialog} onOpenChange={setShowPriceDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>What would you be willing to pay?</DialogTitle>
+            <DialogDescription>
+              Drag the slider to indicate how much you'd be willing to pay for Focus Flow per month.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-6 py-4">
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium">Free</span>
+                <span className="text-sm font-medium">$10+</span>
+              </div>
+              <Slider
+                value={[pricePreference]}
+                min={0}
+                max={10}
+                step={1}
+                onValueChange={(value) => setPricePreference(value[0])}
+                className="py-4"
+              />
+              <div className="text-center">
+                <span className="text-lg font-semibold">{formatPriceLabel(pricePreference)}</span>
+                <p className="text-sm text-muted-foreground mt-1">per month</p>
+              </div>
+            </div>
+          </div>
           <Button 
-            onClick={handleFeedbackSubmit} 
+            onClick={handlePriceSubmit} 
             className="w-full"
             disabled={isSubmitting}
           >
