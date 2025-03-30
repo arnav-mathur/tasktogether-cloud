@@ -18,12 +18,19 @@ const features = [
   "App Blocking - that blocks distracting apps during focus sessions"
 ];
 
+interface FeatureRating {
+  feature: string;
+  excitement: number;
+}
+
 const Waitlist = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showFeaturesDialog, setShowFeaturesDialog] = useState(false);
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
   const [showPriceDialog, setShowPriceDialog] = useState(false);
-  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+  const [featureRatings, setFeatureRatings] = useState<FeatureRating[]>(
+    features.map(feature => ({ feature, excitement: 0 }))
+  );
   const [feedback, setFeedback] = useState("");
   const [pricePreference, setPricePreference] = useState(5);
   const [email, setEmail] = useState("");
@@ -35,12 +42,12 @@ const Waitlist = () => {
     setShowFeaturesDialog(true);
   };
   
-  const handleFeatureChange = (feature: string, checked: boolean) => {
-    if (checked) {
-      setSelectedFeatures([...selectedFeatures, feature]);
-    } else {
-      setSelectedFeatures(selectedFeatures.filter(f => f !== feature));
-    }
+  const handleFeatureRatingChange = (feature: string, excitement: number) => {
+    setFeatureRatings(prevRatings => 
+      prevRatings.map(rating => 
+        rating.feature === feature ? { ...rating, excitement } : rating
+      )
+    );
   };
   
   const handleFeatureSubmit = () => {
@@ -61,13 +68,13 @@ const Waitlist = () => {
         throw new Error("Email is required");
       }
       
-      // Add user to Supabase waitlist table with feature preferences, feedback, and price preference
+      // Add user to Supabase waitlist table with feature ratings, feedback, and price preference
       const { error } = await supabase
         .from('waitlist')
         .insert([{
           email: email,
           name: name || null,
-          selected_features: selectedFeatures,
+          feature_ratings: featureRatings,
           feedback: feedback.trim() || null,
           price_preference: pricePreference
         }]);
@@ -80,7 +87,7 @@ const Waitlist = () => {
       
       // Close all dialogs and reset form
       setShowPriceDialog(false);
-      setSelectedFeatures([]);
+      setFeatureRatings(features.map(feature => ({ feature, excitement: 0 })));
       setFeedback("");
       setEmail("");
       setName("");
@@ -129,8 +136,8 @@ const Waitlist = () => {
         open={showFeaturesDialog} 
         onOpenChange={setShowFeaturesDialog}
         features={features}
-        selectedFeatures={selectedFeatures}
-        onFeatureChange={handleFeatureChange}
+        featureRatings={featureRatings}
+        onFeatureRatingChange={handleFeatureRatingChange}
         onSubmit={handleFeatureSubmit}
       />
       
