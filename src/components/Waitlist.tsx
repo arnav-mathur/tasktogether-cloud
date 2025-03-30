@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -17,12 +16,11 @@ import {
 import { Slider } from "@/components/ui/slider";
 
 const features = [
-  "AI Accountability Partner",
-  "Voice & Text to task",
-  "Strategic Reminders (Whatsapp & Notifications)",
-  "Challenges & Streaks",
+  "Voice & Text to task - for easy and efficient calendar management in seconds",
+  "Challenges & Streaks - that you can do with, and are verified by your friends",
+  "AI Accountability Partner - that verifies tasks and sends strategic & personalised Reminders therby holding you accountable",
   "Task Verification System (AI, Location & Social)",
-  "App Blocking"
+  "App Blocking - that blocks distracting apps during focus sessions"
 ];
 
 const Waitlist = () => {
