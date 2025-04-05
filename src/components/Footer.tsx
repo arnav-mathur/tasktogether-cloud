@@ -1,5 +1,7 @@
+
 import { motion } from "framer-motion";
 import { Instagram, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -53,7 +55,7 @@ const Footer = () => {
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Blog</a>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Press</a>
+                <a href="mailto:focusflow.main@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </li>
             </ul>
           </div>
@@ -62,16 +64,16 @@ const Footer = () => {
             <h3 className="text-base font-semibold mb-4">Legal</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms</a>
+                <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms</Link>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy</a>
+                <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy</Link>
               </li>
               <li>
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookies</a>
               </li>
               <li>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact</a>
+                <a href="mailto:focusflow.main@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </li>
             </ul>
           </div>

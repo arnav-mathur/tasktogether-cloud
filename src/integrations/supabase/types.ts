@@ -13,29 +13,29 @@ export type Database = {
         Row: {
           created_at: string
           email: string
+          feature_ratings: Json | null
           feedback: string | null
           id: string
           name: string | null
           price_preference: number | null
-          selected_features: string[] | null
         }
         Insert: {
           created_at?: string
           email: string
+          feature_ratings?: Json | null
           feedback?: string | null
           id?: string
           name?: string | null
           price_preference?: number | null
-          selected_features?: string[] | null
         }
         Update: {
           created_at?: string
           email?: string
+          feature_ratings?: Json | null
           feedback?: string | null
           id?: string
           name?: string | null
           price_preference?: number | null
-          selected_features?: string[] | null
         }
         Relationships: []
       }
