@@ -1,8 +1,11 @@
 
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 const TermsOfService = () => {
   useEffect(() => {
@@ -19,6 +22,15 @@ const TermsOfService = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
+          <div className="mb-8">
+            <Link to="/">
+              <Button variant="ghost" className="gap-2 mb-4">
+                <ArrowLeft size={16} />
+                Back to Home
+              </Button>
+            </Link>
+          </div>
+          
           <h1 className="text-3xl md:text-4xl font-bold mb-8 text-primary">Focus Flow Terms of Service</h1>
           <p className="text-sm text-muted-foreground mb-8">Effective Date: April 4th, 2025</p>
           
