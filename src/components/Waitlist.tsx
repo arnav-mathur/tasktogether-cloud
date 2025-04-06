@@ -71,13 +71,13 @@ const Waitlist = () => {
       // Add user to Supabase waitlist table with feature ratings, feedback, and price preference
       const { error } = await supabase
         .from('waitlist')
-        .insert([{
+        .insert({
           email: email,
           name: name || null,
           feature_ratings: featureRatings,
           feedback: feedback.trim() || null,
           price_preference: pricePreference
-        }]);
+        });
       
       if (error) throw error;
       
