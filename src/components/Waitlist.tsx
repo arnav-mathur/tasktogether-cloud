@@ -74,7 +74,8 @@ const Waitlist = () => {
         .insert({
           email: email,
           name: name || null,
-          feature_ratings: featureRatings,
+          // Convert featureRatings to a plain object for Supabase
+          feature_ratings: featureRatings as unknown as JSON,
           feedback: feedback.trim() || null,
           price_preference: pricePreference
         });
