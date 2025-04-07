@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { Json } from "@/integrations/supabase/types";
 
 import WaitlistForm from "./waitlist/WaitlistForm";
 import FeaturesDialog from "./waitlist/FeaturesDialog";
@@ -74,8 +75,8 @@ const Waitlist = () => {
         .insert({
           email: email,
           name: name || null,
-          // Convert featureRatings to a plain object for Supabase
-          feature_ratings: featureRatings as unknown as JSON,
+          // Convert featureRatings to the correct Json type for Supabase
+          feature_ratings: featureRatings as unknown as Json,
           feedback: feedback.trim() || null,
           price_preference: pricePreference
         });
