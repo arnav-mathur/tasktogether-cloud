@@ -55,7 +55,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="mailto:focus.flow.main@gmail.com" 
+                  href="mailto:focusflow.main@gmail.com" 
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Contact
@@ -81,7 +81,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="mailto:focus.flow.main@gmail.com" 
+                  href="mailto:focusflow.main@gmail.com" 
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Contact

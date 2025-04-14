@@ -9,7 +9,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const DeleteAccount = () => {
   useEffect(() => {
-    // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
 
@@ -50,10 +49,10 @@ const DeleteAccount = () => {
                     <div>
                       <p>Send an email to:</p>
                       <a 
-                        href="mailto:focus.flow.main@gmail.com"
+                        href="mailto:focusflow.main@gmail.com"
                         className="text-primary font-medium hover:underline"
                       >
-                        📩 focus.flow.main@gmail.com
+                        📩 focusflow.main@gmail.com
                       </a>
                     </div>
                   </li>
@@ -109,10 +108,10 @@ const DeleteAccount = () => {
               <p className="text-muted-foreground">
                 If you have any questions or concerns, feel free to reach out at
                 <a 
-                  href="mailto:focus.flow.main@gmail.com"
+                  href="mailto:focusflow.main@gmail.com"
                   className="text-primary font-medium hover:underline mx-1"
                 >
-                  focus.flow.main@gmail.com
+                  focusflow.main@gmail.com
                 </a>
               </p>
             </section>
