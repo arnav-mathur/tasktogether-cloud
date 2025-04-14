@@ -70,6 +70,9 @@ const Footer = () => {
                 <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy</Link>
               </li>
               <li>
+                <Link to="/delete-account" className="text-muted-foreground hover:text-primary transition-colors">Delete Account</Link>
+              </li>
+              <li>
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookies</a>
               </li>
               <li>
