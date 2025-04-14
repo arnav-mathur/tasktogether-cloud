@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Instagram, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -55,7 +54,12 @@ const Footer = () => {
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Blog</a>
               </li>
               <li>
-                <a href="mailto:focusflow.main@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">Contact</a>
+                <a 
+                  href="mailto:focus.flow.main@gmail.com" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Contact
+                </a>
               </li>
             </ul>
           </div>
@@ -76,7 +80,12 @@ const Footer = () => {
                 <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookies</a>
               </li>
               <li>
-                <a href="mailto:focusflow.main@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">Contact</a>
+                <a 
+                  href="mailto:focus.flow.main@gmail.com" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Contact
+                </a>
               </li>
             </ul>
           </div>

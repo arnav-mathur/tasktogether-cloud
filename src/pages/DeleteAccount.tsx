@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -51,10 +50,10 @@ const DeleteAccount = () => {
                     <div>
                       <p>Send an email to:</p>
                       <a 
-                        href="mailto:support@focusflowapp.io"
+                        href="mailto:focus.flow.main@gmail.com"
                         className="text-primary font-medium hover:underline"
                       >
-                        📩 support@focusflowapp.io
+                        📩 focus.flow.main@gmail.com
                       </a>
                     </div>
                   </li>
@@ -110,10 +109,10 @@ const DeleteAccount = () => {
               <p className="text-muted-foreground">
                 If you have any questions or concerns, feel free to reach out at
                 <a 
-                  href="mailto:support@focusflowapp.io"
+                  href="mailto:focus.flow.main@gmail.com"
                   className="text-primary font-medium hover:underline mx-1"
                 >
-                  support@focusflowapp.io
+                  focus.flow.main@gmail.com
                 </a>
               </p>
             </section>
