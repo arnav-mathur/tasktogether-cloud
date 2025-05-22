@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Instagram, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -68,10 +69,10 @@ const Footer = () => {
             <h3 className="text-base font-semibold mb-4">Legal</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms</Link>
+                <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">Terms</Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy</Link>
+                <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">Privacy</Link>
               </li>
               <li>
                 <Link to="/delete-account" className="text-muted-foreground hover:text-primary transition-colors">Delete Account</Link>
