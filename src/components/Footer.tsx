@@ -69,10 +69,24 @@ const Footer = () => {
             <h3 className="text-base font-semibold mb-4">Legal</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/terms-of-service" className="text-muted-foreground hover:text-primary transition-colors">Terms</Link>
+                <a 
+                  href="https://light-scilla-813.notion.site/FocusFlow-Terms-Conditions-21318be6af488024b315f661755fa87a?pvs=74" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Terms
+                </a>
               </li>
               <li>
-                <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">Privacy</Link>
+                <a 
+                  href="https://light-scilla-813.notion.site/FocusFlow-Privacy-Policy-21318be6af488046af32c0e87cc5e8b0" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Privacy
+                </a>
               </li>
               <li>
                 <Link to="/delete-account" className="text-muted-foreground hover:text-primary transition-colors">Delete Account</Link>
